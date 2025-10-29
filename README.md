@@ -1,6 +1,4 @@
-# My ShipFast Template
-
-A modern Next.js full-stack template with authentication, database, and API setup.
+# Invoicly
 
 ## Tech Stack
 
@@ -8,6 +6,7 @@ A modern Next.js full-stack template with authentication, database, and API setu
 - **Language**: TypeScript
 - **Database**: MongoDB with Prisma
 - **Auth**: Better Auth
+- **Email**: NodeMailer
 - **API**: tRPC
 - **UI**: Shadcn UI + Tailwind CSS
 - **Package Manager**: Bun

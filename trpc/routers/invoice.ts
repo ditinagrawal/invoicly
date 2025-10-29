@@ -133,10 +133,17 @@ export const invoiceRouter = createTRPCRouter({
     const invoices = await ctx.db.invoice.findMany({
       where: { userId: ctx.session.user.id },
     });
-    const totalRevenue = invoices.reduce((acc, invoice) => acc + invoice.total, 0);
+    const totalRevenue = invoices.reduce(
+      (acc, invoice) => acc + invoice.total,
+      0,
+    );
     const totalInvoices = invoices.length;
-    const totalPaidInvoices = invoices.filter((invoice) => invoice.status === "PAID").length;
-    const totalOpenInvoices = invoices.filter((invoice) => invoice.status === "PENDING").length;
+    const totalPaidInvoices = invoices.filter(
+      (invoice) => invoice.status === "PAID",
+    ).length;
+    const totalOpenInvoices = invoices.filter(
+      (invoice) => invoice.status === "PENDING",
+    ).length;
     return {
       totalRevenue,
       totalInvoices,
@@ -167,9 +174,7 @@ export const invoiceRouter = createTRPCRouter({
         where: {
           userId: ctx.session.user.id,
           date: { gte: start, lte: now },
-          ...(input?.includePending
-            ? {}
-            : { status: "PAID" as const }),
+          ...(input?.includePending ? {} : { status: "PAID" as const }),
         },
         select: {
           total: true,

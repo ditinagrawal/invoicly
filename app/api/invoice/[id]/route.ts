@@ -1,12 +1,12 @@
 import { db } from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import jsPDF from "jspdf";
 
 export const GET = async (
-  request: Request,
-  { params }: { params: { id: string } },
+  request: NextRequest,
+  context: { params: Promise<{ id: string }> },
 ) => {
-  const { id } = await params;
+  const { id } = await context.params;
   const invoice = await db.invoice.findUnique({
     where: { id },
   });
